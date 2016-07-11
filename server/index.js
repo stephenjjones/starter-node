@@ -1,10 +1,13 @@
+require('dotenv').config();
 const path = require('path');
 
 const express = require('express');
 const morgan = require('morgan');
 
+const db = require('./db');
 const authRouter = require('./auth/routes');
 const apiRouter = require('./api/routes');
+//const adminRouter = require('./admin/routes');
 
 const app = express();
 
@@ -15,6 +18,7 @@ app.use('/static', express.static(staticPath));
 
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
+//app.use('/admin', adminRouter);
 
 app.use((req, res) => {
   res.status(404);
@@ -27,5 +31,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3003, () => {
-  console.log('App started on port 3000');
+  console.log('App started on port 3003');
 });
